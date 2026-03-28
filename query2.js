@@ -8,8 +8,10 @@
 
 function unwind_friends(dbname) {
     db = db.getSiblingDB(dbname);
-
-    // TODO: unwind friends
-
+    db.users.aggregate([
+        {$unwind: "$friends"},           // explode array into one doc per element
+        { $project: { user_id: 1, friends: 1, _id: 0} },
+        {$out: "flat_users"}      // write to a new collection
+    ]);    // TODO: unwind friends
     return;
 }
