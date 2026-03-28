@@ -1,0 +1,36 @@
+SQL> DESCRIBE project3.public_USERS;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ USER_ID                                            NUMBER
+ FIRST_NAME                                NOT NULL VARCHAR2(100)
+ LAST_NAME                                 NOT NULL VARCHAR2(100)
+ YEAR_OF_BIRTH                                      NUMBER(38)
+ MONTH_OF_BIRTH                                     NUMBER(38)
+ DAY_OF_BIRTH                                       NUMBER(38)
+ GENDER                                             VARCHAR2(100)
+
+ SQL> DESCRIBE project3.public_FRIENDS;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ USER1_ID                                  NOT NULL NUMBER
+ USER2_ID                                  NOT NULL NUMBER
+
+ SQL> DESCRIBE project3.public_CITIES;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ CITY_ID                                            NUMBER(38)
+ CITY_NAME                                 NOT NULL VARCHAR2(100)
+ STATE_NAME                                NOT NULL VARCHAR2(100)
+ COUNTRY_NAME            
+
+ SQL> DESCRIBE project3.public_USER_CURRENT_CITIES;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ USER_ID                                            NUMBER
+ CURRENT_CITY_ID                           NOT NULL NUMBER(38)
+
+ SQL> DESCRIBE project3.public_USER_HOMETOWN_CITIES;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ USER_ID                                            NUMBER
+ HOMETOWN_CITY_ID                          NOT NULL NUMBER(38)
