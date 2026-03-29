@@ -9,9 +9,29 @@
 
 function oldest_friend(dbname) {
     db = db.getSiblingDB(dbname);
-
+    db.users.aggregate([
+        {$unwind: "$friends"},
+        {$project: { user_id: 1, friends: 1, _id: 0} },
+        {$out: "flat_users"}
+    ]);    // TODO: unwind friends
     let results = {};
     // TODO: implement oldest friends
+    db.users.find().forEach(function(user) {
+        let user_friends = []
+        db.flat_users.find({"friends" : user.user_id}).forEach(function(connection) {
+            user_friends.push(connection.user_id);
+        })
 
+        db.flat_users.find({"user_id" : user.user_id}).forEach(function(connection) {
+            user_friends.push(connection.friends);
+        })
+
+        if (user_friends.length == 0) {
+            return;
+        }
+
+        let oldest = db.users.find({user_id: {$in: user_friends}}).sort({YOB: 1, user_id: 1}).limit(1).next();
+        results[user.user_id] = oldest.user_id;
+    });
     return results;
 }
