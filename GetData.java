@@ -123,6 +123,7 @@ public class GetData {
                 user.getJSONObject("hometown").put("country",country);
             }
 
+            rst.close();
             friends_rst.close();
             current_rst.close();
             home_rst.close();
