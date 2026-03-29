@@ -19,6 +19,20 @@ function suggest_friends(year_diff, dbname) {
 
     let pairs = [];
     // TODO: implement suggest friends
+    let males_users = db.users.find({"gender" : "male"});
 
+    males_users.forEach(function(male) {
+        let female_users = db.users.find({
+            "gender" : "female", 
+            "hometown.city" : male.hometown.city,
+            "YOB" : {$gt: male.YOB - year_diff, $lt : male.YOB + year_diff}
+        });
+
+        female_users.forEach(function(female) {
+            if (female.friends.indexOf(male.user_id) === -1 && male.friends.indexOf(female.user_id) === -1) {
+                pairs.push([male.user_id,female.user_id]);
+            }
+        });
+    });
     return pairs;
 }
